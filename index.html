@@ -74,6 +74,7 @@
 	<ul>
 		<li>Reactor Loop</li>
 		<li>Deferred</li>
+		<li>Transport &amp; protocol separation</li>
 		<li>Protocol implementations</li>
 	</ul>
 </section>
@@ -88,30 +89,50 @@
 	<h2>Deferred</h2>
 
 	<ul>
+		<li>An object returned instead of the result.</li>
+		<li>You attach callback and errback functions to it which get called when the result actually arrives.</li>
 		<li>Hard to describe</li>
 		<li>Easier to read the source code</li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>Deferred</h2>
+	<pre><code class="python">
+# Deferred example usage
 
-	<ul>
-		<li>Hard to describe</li>
-		<li>Easier to read the source code</li>
-	</ul>
+def callback(result):
+	for i in result: print i
 
-	<pre class="slide"><code class="python" style="color: black;">
-def callback1(result):
-	print result
-
-def errback1(reason):
+def errback(reason):
 	print reason
 
-d = getDeferredFromSomewhere()
-d.addCallback(callback1)
-d.addErrback(errback1)
+d = getDeferredFromSomewhere() # simplified
+d.addCallback(callback)
+d.addErrback(errback)
+d.addBoth(lambda _: reactor.stop())
+
+reactor.run()
 	</code></pre>
+</section>
+
+<section class="slide">
+	<pre><code class="python">
+# Somewhere:
+class DailyRatesProtocol(Protocol):
+    def __init__(self):
+        self.deferred = Deferred()
+
+    def dataReceived(self, bytes):
+        self.data = bytes # simplified
+
+    def connectionLost(self, reason):
+        log.debug('Finished receiving body:', reason.getErrorMessage())
+
+        interesting = parsing_magic_happens(self.data)
+
+        self.deferred.callback(interesting)
+	</code></pre>
+	<div>(almost) actual code from <a href="https://github.com/yaccz/pycnb">https://github.com/yaccz/pycnb</a></div>
 </section>
 
 <section class="slide">
