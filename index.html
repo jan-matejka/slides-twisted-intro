@@ -26,6 +26,10 @@
 
 	<!-- Required Modernizr file -->
 	<script src="deck/modernizr.custom.js"></script>
+
+	<link rel="stylesheet" href="./highlight/src/styles/github.css">
+	<script src="./highlight/build/highlight.pack.js"></script>
+	<!-- ^ this need to be built with build.py tool in highlight/tools -->
 </head>
 <body class="deck-container">
 
@@ -42,38 +46,77 @@
 
 	<ul>
 		<li>Starts at year 2000</li>
-		<li><a href="https://twitter.com/glyph">@glyph</a>, the creator of Twisted, was working on a text-based multiplayer game called Twisted Reality.</li>
-		<li>It was a big mess of threads, 3 per connection, in Java.</li>
-		<li>Alternative <a href="http://docs.python.org/library/select.html">select</a></li>
+		<li><a href="https://twitter.com/glyph">@glyph</a>, the creator of Twisted, was working on a text-based multiplayer game called Twisted Reality</li>
+		<li>It was a big mess of threads, 3 per connection, in Java</li>
+		<li>Alternative found in python <a href="http://docs.python.org/library/select.html">select</a></li>
 	</ul>
 </section>
 
 
 <section class="slide">
-	<h2>Archaisms</h2>
+	<h2>What is Twisted?</h2>
 
 	<ul>
-		<li>PEP8 noncompliant</li>
-		<li><code>twisted.log</code></li>
+		<li>Framework for asynchronous <strong>programming</strong></li>
+		<li class="slide">It's not just asynchronous layer in between socket and synchronous code (like gevent)</li>
+		<li class="slide">This fundamentally affects how you write and think about the code
+			<ul>
+				<li class="slide">nonlinear code with callbacks</li>
+				<li class="slide">can't use synchornous-only libraries</li>
+			</ul>
+		</li>
 	</ul>
 </section>
 
-
-
 <section class="slide">
-	<h2>Deferred</h2>
+	<h2>Features</h2>
+
+	<ul>
+		<li>Reactor Loop</li>
+		<li>Deferred</li>
+		<li>Protocol implementations</li>
+	</ul>
 </section>
 
 <section class="slide">
 	<h2>Reactor Loop</h2>
 
+	<div><img style="width: 40%; height: 40%;" src="./assets/reactor-callback.png" alt="Reactor Loop diagram" /></div>
+</section>
+
+<section class="slide">
+	<h2>Deferred</h2>
+
 	<ul>
-		<li>Unstoppable</li>
+		<li>Hard to describe</li>
+		<li>Easier to read the source code</li>
 	</ul>
 </section>
 
 <section class="slide">
-	<h2>Protocol & transport separation</h2>
+	<h2>Deferred</h2>
+
+	<ul>
+		<li>Hard to describe</li>
+		<li>Easier to read the source code</li>
+	</ul>
+
+	<pre class="slide"><code class="python" style="color: black;">
+def callback1(result):
+	print result
+
+def errback1(reason):
+	print reason
+
+d = getDeferredFromSomewhere()
+d.addCallback(callback1)
+d.addErrback(errback1)
+	</code></pre>
+</section>
+
+<section class="slide">
+	<h2>Protocol implementations</h2>
+
 </section>
 
 <section class="slide">
@@ -147,6 +190,8 @@
 	$(function() {
 		$.deck('.slide');
 	});
+
+	hljs.initHighlightingOnLoad();
 </script>
 </body>
 </html>
