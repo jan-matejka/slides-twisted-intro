@@ -48,7 +48,7 @@
 		<li>Starts at year 2000</li>
 		<li><a href="https://twitter.com/glyph">@glyph</a>, the creator of Twisted, was working on a text-based multiplayer game called Twisted Reality</li>
 		<li>It was a big mess of threads, 3 per connection, in Java</li>
-		<li>Alternative found in python <a href="http://docs.python.org/library/select.html">select</a></li>
+		<li>Alternative found in python <a href="http://docs.python.org/library/select.html">select</a> module</li>
 	</ul>
 </section>
 
@@ -93,20 +93,19 @@
 		<li>An object returned instead of the result</li>
 		<li>Attached functions in callback/errback chains.</li>
 		<li>When the result actually arrives the callback chain gets executed</li>
-		<li>Hard to describe, easier to read the source code</li>
+		<li>Hard to describe, easier to read the <a href="http://twistedmatrix.com/trac/browser/tags/releases/twisted-11.0.0/twisted/internet/defer.py#L467">source code</a></li>
 	</ul>
 </section>
 
 <section class="slide">
 	<pre><code class="python lined"># Deferred example
-
 def callback(result):
 	for i in result: print i
 
 def errback(reason):
 	print reason
 
-d = getDeferredFromSomewhere() # simplified
+d = getDeferredFromSomewhere()
 d.addCallback(callback)
 d.addErrback(errback)
 d.addBoth(lambda _: reactor.stop())
@@ -115,13 +114,13 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
-	<pre><code class="python lined">class DailyRatesProtocol(Protocol):
+	<pre><code class="python lined">class DRP(Protocol): # DailyRatesProtocol
     def __init__(self, response):
         self.deferred = Deferred()
         response.deliverBody(self)
 
     def dataReceived(self, bytes):
-        self.data = bytes # simplified
+        self.data = bytes
 
     def connectionLost(self, reason):
         log.debug('Finished receiving body:',
@@ -134,7 +133,7 @@ def _gotRates(result):
     for i in result: print i
 
 d = http_agent.request('GET', url)
-d.addCallback(lambda response: DailyRatesProtocol(response).deferred)
+d.addCallback(lambda response: DRP(response).deferred)
 d.addCallback(_gotRates)
 d.addErrback(log.error)
 d.addBoth(lambda x: reactor.stop())
