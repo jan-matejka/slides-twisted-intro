@@ -98,7 +98,7 @@
 </section>
 
 <section class="slide">
-	<pre class="lined"><code class="python">
+	<pre><code class="python lined">
 # Deferred example usage
 
 def callback(result):
@@ -117,7 +117,7 @@ reactor.run()
 </section>
 
 <section class="slide">
-	<pre class="lined"><code class="python">
+	<pre><code class="python lined">
 class DailyRatesProtocol(Protocol):
     def __init__(self, response):
         self.deferred = Deferred()
@@ -247,7 +247,11 @@ d.addBoth(lambda x: reactor.stop())
 		);
 	});
 
-	hljs.initHighlightingOnLoad();
+	//hljs.initHighlightingOnLoad();
+	$("code").each(function(i,v) { hljs.highlightBlock(v); });
+	/* .lined class must be on code in order to be visible in all cases (if it is on pre tag it will be out of monitor when the pre is fully strectched on the screen)
+	 * then highlight.js must be called explicitly for specific blocks we need to highlight, so just "code" tags, instead of "pre code"
+	 */
 </script>
 </body>
 </html>
