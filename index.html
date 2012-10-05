@@ -76,6 +76,7 @@
 		<li>Deferred</li>
 		<li>Transport &amp; protocol separation</li>
 		<li>Protocol implementations</li>
+		<li>Foreign Loop support</li>
 	</ul>
 </section>
 
@@ -89,8 +90,9 @@
 	<h2>Deferred</h2>
 
 	<ul>
-		<li>An object returned instead of the result.</li>
-		<li>You attach callback and errback functions to it which get called when the result actually arrives.</li>
+		<li>An object returned instead of the result</li>
+		<li>You attach callback/errback functions to it.</li>
+		<li>When the result actually arrives the callback chain gets executed</li>
 		<li>Hard to describe</li>
 		<li>Easier to read the source code</li>
 	</ul>
