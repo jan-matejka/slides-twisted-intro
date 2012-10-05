@@ -98,6 +98,12 @@
 </section>
 
 <section class="slide">
+	<h2>Deferred callback chains</h2>
+
+	<img src="./assets/deferred-process.png" style="width: 40%; height: 40%;" alt="deferred proccess" />
+</section>
+
+<section class="slide">
 	<pre><code class="python lined"># Deferred example
 def callback(result):
 	for i in result: print i
@@ -111,6 +117,15 @@ d.addErrback(errback)
 d.addBoth(lambda _: reactor.stop())
 
 reactor.run()</code></pre>
+</section>
+
+<section class="slide">
+	<h2>Transport &amp; protocol separation</h2>
+
+	<ul>
+		<li>Layer abstraction/encapsulation similar to <a href="http://en.wikipedia.org/wiki/TCP/IP_model">TCP/IP model</a></li>
+		<li>example: json-rpc - http/netstrings</li>
+	</ul>
 </section>
 
 <section class="slide">
@@ -141,17 +156,12 @@ d.addBoth(lambda x: reactor.stop())
 </section>
 
 <section class="slide">
-	<h2>Transport &amp; protocol separation</h2>
-
-	<ul>
-		<li>Layer abstraction/encapsulation similar to <a href="http://en.wikipedia.org/wiki/TCP/IP_model">TCP/IP model</a></li>
-		<li>example: json-rpc - http/netstrings</li>
-	</ul>
-</section>
-
-<section class="slide">
 	<h2>Protocol implementations</h2>
 
+	<ul>
+		<li>
+		</li>
+	</ul>
 </section>
 
 <section class="slide">
