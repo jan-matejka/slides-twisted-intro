@@ -138,18 +138,33 @@ class DailyRatesProtocol(Protocol):
 </section>
 
 <section class="slide">
+	<h2>Transport &amp; protocol separation</h2>
+
+	<ul>
+		<li>Layer abstraction/encapsulation similar to <a href="http://en.wikipedia.org/wiki/TCP/IP_model">TCP/IP model</a></li>
+		<li>example: json-rpc - http/netstrings</li>
+	</ul>
+</section>
+
+<section class="slide">
 	<h2>Protocol implementations</h2>
 
 </section>
 
 <section class="slide">
-	<h2>Databases</h2>
-
+	<h2>Caveats</h2>
 	<ul>
-		<li>DjangoORM - evenia</li>
-		<li>SQLalchemy deferToThread</li>
+		<li>Database access
+			<ul>
+				<li class="slide">Django <a href="http://evennia.com/">evennia MUD</a></li>
+				<li class="slide">SQLalchemy w/ deferToThread</li>
+				<li class="slide"><code>twisted.enterprise.adbapi</code> asynchronous DB-API v2.0 (raw SQL)</li>
+				<li class="slide"><a href="http://findingscience.com/twistar/">Twistar</a> Active Record for Twisted</li>
+			</ul>
+		</li>
+		<li class="slide">trial (unit testing). some errors manifest in later test cases</li>
 	</ul>
-</section>
+<section>
 
 <section class="slide">
 	<h2>Footnotes</h2>
@@ -161,7 +176,7 @@ class DailyRatesProtocol(Protocol):
 
 	<ul class="TODO">
 		<li>Slides hosted at <a href="https://github.com/yaccz/slides-twisted-intro">github.com/yaccz/slides-twisted-intro</a></li>
-		<li>Compiled by <a href="https://twitter.com/yaccz">@yaccz</a></li>
+		<li><a href="https://twitter.com/yaccz">@yaccz</a></li>
 	</ul>
 </section>
 
