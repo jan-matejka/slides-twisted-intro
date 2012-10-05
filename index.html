@@ -98,8 +98,7 @@
 </section>
 
 <section class="slide">
-	<pre><code class="python lined">
-# Deferred example usage
+	<pre><code class="python lined"># Deferred example
 
 def callback(result):
 	for i in result: print i
@@ -112,13 +111,11 @@ d.addCallback(callback)
 d.addErrback(errback)
 d.addBoth(lambda _: reactor.stop())
 
-reactor.run()
-	</code></pre>
+reactor.run()</code></pre>
 </section>
 
 <section class="slide">
-	<pre><code class="python lined">
-class DailyRatesProtocol(Protocol):
+	<pre><code class="python lined">class DailyRatesProtocol(Protocol):
     def __init__(self, response):
         self.deferred = Deferred()
         response.deliverBody(self)
@@ -127,14 +124,14 @@ class DailyRatesProtocol(Protocol):
         self.data = bytes # simplified
 
     def connectionLost(self, reason):
-        log.debug('Finished receiving body:', reason.getErrorMessage())
+        log.debug('Finished receiving body:',
+            reason.getErrorMessage())
 
         interesting = parsing_magic_happens(self.data)
-
         self.deferred.callback(interesting)
 
 def _gotRates(result):
-	for i in result: print i
+    for i in result: print i
 
 d = http_agent.request('GET', url)
 d.addCallback(lambda response: DailyRatesProtocol(response).deferred)
@@ -142,7 +139,6 @@ d.addCallback(_gotRates)
 d.addErrback(log.error)
 d.addBoth(lambda x: reactor.stop())
 	</code></pre>
-	<div>(almost) actual code from <a href="https://github.com/yaccz/pycnb">https://github.com/yaccz/pycnb</a></div>
 </section>
 
 <section class="slide">
