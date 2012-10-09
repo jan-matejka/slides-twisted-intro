@@ -159,9 +159,26 @@ d.addBoth(lambda x: reactor.stop())
 	<h2>Protocol implementations</h2>
 
 	<ul>
-		<li>
-		</li>
+		<li>Many existing implementations of standard protocols</li>
+		<li>HTTP, IRC, XMPP, SMTP, etc</li>
+		<li>you just provide the implementation to the prepared interface</li>
 	</ul>
+</section>
+
+<section class="slide">
+	<h2>IRC protocol example</h2>
+	<pre><code class="python lined">class IRCClient(basic.LineReceiver):
+    def userJoined(self, user, channel):
+        """Called when I see another user joining a channel.
+        """
+        pass
+
+    def topicUpdated(self, user, channel, newTopic):
+        """In channel, user changed the topic to newTopic.
+
+        Also called when first joining a channel.
+        """
+        pass</code></pre>
 </section>
 
 <section class="slide">
