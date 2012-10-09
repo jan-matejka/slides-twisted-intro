@@ -141,8 +141,8 @@ reactor.run()</code></pre>
         log.debug('Finished receiving body:',
             reason.getErrorMessage())
 
-        interesting = parsing_magic_happens(self.data)
-        self.deferred.callback(interesting)
+        parsed = parsing_magic_happens(self.data)
+        self.deferred.callback(parsed)
 
 def _gotRates(result):
     for i in result: print i
