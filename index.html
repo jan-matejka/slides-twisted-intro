@@ -184,12 +184,13 @@ d.addBoth(lambda _: reactor.stop())
 	<h2>Protocol implementations</h2>
 
 	<ul>
-		<li>Many existing implementations of standard protocols</li>
-		<li>HTTP, IRC, XMPP, SMTP, etc</li>
-		<li>you just provide the implementation to the prepared interface
-			<ol class="slide"><li>derive protocol and add events implementation</li>
-				<li>attach protocol to transport</li>
-				<li>start the reactor</li>
+		<li>Big advantage is many existing implementations of standard protocols</li>
+		<li>like HTTP, IRC, XMPP, SMTP, etc</li>
+		<li>using them is just a matter of implementating the prepared interfaces:
+			<ol class="slide"><li class="slide">deriving the protocol interface</li>
+				<li class="slide">implementing the event methods</li>
+				<li class="slide">attaching the protocol to transport</li>
+				<li class="slide">and starting the reactor</li>
 			</ol>
 		</li>
 	</ul>
