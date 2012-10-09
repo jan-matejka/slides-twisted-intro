@@ -307,6 +307,16 @@ d.addBoth(lambda _: reactor.stop())
 		$(".lined").linedtextarea(
 			{selectedLine: 1}
 		);
+
+		// {{{ mouse controll for the slides
+		document.oncontextmenu = function() {return false;};
+		$(document).mousedown(function(e){
+			arg='next';
+			if( e.button == 2 )
+				arg='prev';
+			$.deck(arg);
+		});
+		// }}}
 	});
 
 	//hljs.initHighlightingOnLoad();
