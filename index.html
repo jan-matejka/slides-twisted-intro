@@ -174,7 +174,12 @@ d.addBoth(lambda _: reactor.stop())
 	<ul>
 		<li>Many existing implementations of standard protocols</li>
 		<li>HTTP, IRC, XMPP, SMTP, etc</li>
-		<li>you just provide the implementation to the prepared interface</li>
+		<li>you just provide the implementation to the prepared interface
+			<ol class="slide"><li>derive protocol and add events implementation</li>
+				<li>attach protocol to transport</li>
+				<li>start the reactor</li>
+			</ol>
+		</li>
 	</ul>
 </section>
 
