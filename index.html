@@ -182,6 +182,15 @@ d.addBoth(lambda x: reactor.stop())
 </section>
 
 <section class="slide">
+	<h2>Foreign Loop support</h2>
+
+	<ul>
+		<li>Twisted can integrate with foreign event loops, such as those of GTK+, Qt and Cocoa (through PyObjC)</li>
+		<li>This allows using Twisted as the networking support layer in graphical user interface (GUI)</li>
+	</ul>
+</section>
+
+<section class="slide">
 	<h2>Caveats</h2>
 	<ul>
 		<li>Database access
