@@ -58,11 +58,11 @@
 
 	<ul>
 		<li>Framework for asynchronous <strong>programming</strong></li>
-		<li class="slide">It's not just asynchronous layer in between socket and synchronous code (like gevent)</li>
-		<li class="slide">This fundamentally affects how you write and think about the code
+		<li class="slide">It's not just asynchronous layer in between socket and synchronous code</li>
+		<li class="slide">This asynchronny fundamentally affects how you write and think about the code
 			<ul>
-				<li class="slide">nonlinear code with callbacks</li>
-				<li class="slide">troublesome use of synchornous-only libraries</li>
+				<li class="slide">I/O performed via callbacks which makes the code nonlinear</li>
+				<li class="slide">troublesome use of libraries without async interface</li>
 			</ul>
 		</li>
 	</ul>
@@ -125,7 +125,7 @@ reactor.run()</code></pre>
 	<ul>
 		<li>Layer abstraction/encapsulation similar to <a href="http://en.wikipedia.org/wiki/TCP/IP_model">TCP/IP model</a></li>
 		<li>example: json-rpc - http/netstrings</li>
-		<li class="slide">Main parts<ul>
+		<li class="slide">3 main parts<ul>
 			<li>Transports</li>
 			<li>Factories</li>
 			<li>Protocols</li>
