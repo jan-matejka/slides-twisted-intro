@@ -226,14 +226,22 @@ d.addBoth(lambda _: reactor.stop())
 	<ul>
 		<li>Database access
 			<ul>
-				<li class="slide">Django <a href="http://evennia.com/">evennia MUD</a></li>
-				<li class="slide">SQLalchemy w/ deferToThread</li>
+				<li class="slide">Kinda complicated due to non-blocking requirement</li>
+				<li class="slide">but there is <a href="http://evennia.com/">evennia MUD project</a> somehow using Django ORM</li>
+				<li class="slide">SQLalchemy can be used w/ deferToThread</li>
 				<li class="slide"><code>twisted.enterprise.adbapi</code> asynchronous DB-API v2.0 (raw SQL)</li>
 				<li class="slide"><a href="http://findingscience.com/twistar/">Twistar</a> Active Record for Twisted</li>
 			</ul>
 		</li>
-		<li class="slide">Trial (unit testing). some errors manifest in later test cases</li>
-		<li class="slide">Relatively small community and slow progress</li>
+		<li class="slide">Twisted's unit test runner - Trial<ul>
+			<li class="slide">some errors manifest in later test cases</li>
+			</ul>
+		</li>
+		<li class="slide">Twisted as a platform<ul>
+			<li class="slide">Most of the libraries are synchronous -> shoratge of libs that play well with twisted</li>
+			<li class="slide">Relatively small community and slow progress on new standards</li>
+			</ul>
+		</li>
 	</ul>
 </section>
 
