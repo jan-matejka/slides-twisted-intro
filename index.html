@@ -134,14 +134,14 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
-	<h2>Data flow / object lifetime</h2>
+	<h2>flow / object lifetime</h2>
 
 	<ol>
-		<li>Twisted listens on TCP socket (transport with a factory)</li>
-		<li>When client connects, factory creates the Protocol object</li>
-		<li>Transport delivers data into the Protocol</li>
-		<li>Protocol handles the data</li>
-		<li>When connection is terminated, protocol object is destroyed</li>
+		<li class="slide">Transport (with a factory) listens on TCP socket</li>
+		<li class="slide">When client connects, factory creates the Protocol object</li>
+		<li class="slide">Transport delivers data into the Protocol</li>
+		<li class="slide">Protocol handles the data</li>
+		<li class="slide">When connection is terminated, protocol object is destroyed</li>
 	</ol>
 </section>
 
