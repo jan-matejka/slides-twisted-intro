@@ -134,6 +134,18 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
+	<h2>Data flow / object lifetime</h2>
+
+	<ol>
+		<li>Twisted listens on TCP socket (transport with a factory)</li>
+		<li>When client connects, factory creates the Protocol object</li>
+		<li>Transport delivers data into the Protocol</li>
+		<li>Protocol handles the data</li>
+		<li>When connection is terminated, protocol object is destroyed</li>
+	</ol>
+</section>
+
+<section class="slide">
 	<h2>PyCNB</h2>
 	<pre><code class="">yac@sam % pycnb
 ('EUR', '24,935')
