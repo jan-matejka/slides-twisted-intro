@@ -164,7 +164,7 @@ d = http_agent.request('GET', url)
 d.addCallback(lambda response: DRP(response).deferred)
 d.addCallback(_gotRates)
 d.addErrback(log.error)
-d.addBoth(lambda x: reactor.stop())
+d.addBoth(lambda _: reactor.stop())
 	</code></pre>
 </section>
 
