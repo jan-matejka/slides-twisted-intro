@@ -155,30 +155,33 @@ yac@sam %</pre></code>
 </section>
 
 <section class="slide">
-	<pre><code class="python lined">class DRP(Protocol): # DailyRatesProtocol
-    def __init__(self, response):
-        self.deferred = Deferred()
-        response.deliverBody(self)
+	<pre><code class="python lined">class DailyRatesProtocol(LineReceiver):
+    delimiter = '\n'
 
-    def dataReceived(self, bytes):
-        self.data = bytes
+    def __init__(self):
+        self.deferred = defer.Deferred()
+        self.rates = {}
+
+    def lineReceived(self, line):
+        cols = line.split("|")
+        self.rates[cols[3]] = Decimal(cols[4])
 
     def connectionLost(self, reason):
-        log.debug('Finished receiving body:',
-            reason.getErrorMessage())
+        self.deferred.callback(self.rates)
 
-        parsed = parsing_magic_happens(self.data)
-        self.deferred.callback(parsed)
-
-def _gotRates(result):
+def got_rates(result):
     for i in result: print i
 
+drp = DailyRatesProtocol()
+drp.deferred.addCallback(got_rates)
+
 d = http_agent.request('GET', url)
-d.addCallback(lambda response: DRP(response).deferred)
-d.addCallback(_gotRates)
+d.addCallback(lambda r: r.deliverBody(drp))
+d.addCallback(lambda _: drp.deferred)
 d.addErrback(log.error)
-d.addBoth(lambda _: reactor.stop())
-	</code></pre>
+d.addBoth(lambda x: reactor.stop())
+
+reactor.run()</code></pre>
 </section>
 
 <section class="slide">
