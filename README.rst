@@ -1,6 +1,8 @@
 Usage
 =======
-just open the index.html in a browser (tested on chromium)
+just open http://yaccz.github.com/slides-twisted-intro/
+
+or clone and open the index.html in a browser (tested on chromium)
 
 Build & libraries
 ==================
