@@ -145,44 +145,6 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
-	<h2>PyCNB</h2>
-	<pre><code class="">yac@sam % pycnb
-('EUR', '24,935')
-('USD', '19,249')
-yac@sam %</pre></code>
-</section>
-
-<section class="slide">
-	<pre><code class="python lined">class DailyRatesProtocol(LineReceiver):
-    delimiter = '\n'
-
-    def __init__(self):
-        self.deferred = defer.Deferred()
-        self.rates = {}
-
-    def lineReceived(self, line):
-        cols = line.split("|")
-        self.rates[cols[3]] = Decimal(cols[4])
-
-    def connectionLost(self, reason):
-        self.deferred.callback(self.rates)
-
-def got_rates(result):
-    for i in result: print i
-
-drp = DailyRatesProtocol()
-drp.deferred.addCallback(got_rates)
-
-d = http_agent.request('GET', url)
-d.addCallback(lambda r: r.deliverBody(drp))
-d.addCallback(lambda _: drp.deferred)
-d.addErrback(log.error)
-d.addBoth(lambda x: reactor.stop())
-
-reactor.run()</code></pre>
-</section>
-
-<section class="slide">
 	<h2>Protocol implementations</h2>
 
 	<ul>
