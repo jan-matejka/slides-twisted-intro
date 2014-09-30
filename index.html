@@ -1,111 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=1024, user-scalable=no">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
 
-	<title>Twisted Intro</title>
+  <title>Twisted Intro</title>
 
-	<!-- Required stylesheet -->
-	<link rel="stylesheet" href="deck/core/deck.core.css">
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" href="deck/core/deck.core.css">
 
-	<!-- Extension CSS files go here. Remove or add as needed. -->
-	<link rel="stylesheet" href="deck/extensions/goto/deck.goto.css">
-	<link rel="stylesheet" href="deck/extensions/menu/deck.menu.css">
-	<link rel="stylesheet" href="deck/extensions/navigation/deck.navigation.css">
-	<link rel="stylesheet" href="deck/extensions/status/deck.status.css">
-	<link rel="stylesheet" href="deck/extensions/hash/deck.hash.css">
-	<link rel="stylesheet" href="deck/extensions/scale/deck.scale.css">
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" href="deck/extensions/goto/deck.goto.css">
+  <link rel="stylesheet" href="deck/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" href="deck/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" href="deck/extensions/status/deck.status.css">
+  <link rel="stylesheet" href="deck/extensions/hash/deck.hash.css">
+  <link rel="stylesheet" href="deck/extensions/scale/deck.scale.css">
 
-	<!-- Style theme. More available in /themes/style/ or create your own. -->
-	<link rel="stylesheet" href="deck/themes/style/web-2.0.css">
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" href="deck/themes/style/web-2.0.css">
 
-	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
-	<link rel="stylesheet" href="deck/themes/transition/horizontal-slide.css">
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" href="deck/themes/transition/horizontal-slide.css">
 
-	<!-- Required Modernizr file -->
-	<script src="deck/modernizr.custom.js"></script>
+  <!-- Required Modernizr file -->
+  <script src="deck/modernizr.custom.js"></script>
 
-	<link rel="stylesheet" href="./highlight/src/styles/github.css">
-	<script src="./built/highlight.pack.js"></script>
-	<!-- ^ this need to be built with build.py tool in highlight/tools -->
+  <link rel="stylesheet" href="./highlight/src/styles/github.css">
+  <script src="./built/highlight.pack.js"></script>
+  <!-- ^ this need to be built with build.py tool in highlight/tools -->
 </head>
 <body class="deck-container">
 
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section class="slide">
-	<h2>Twisted</h2>
+  <h2>Twisted</h2>
 
-	<div>Event-driven networking engine in Python licensed under <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</div>
+  <div>Event-driven networking engine in Python licensed under <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</div>
 </section>
 
 <section class="slide">
-	<h2>History</h2>
+  <h2>History</h2>
 
-	<ul>
-		<li>Starts at year 2000</li>
-		<li><a href="https://twitter.com/glyph">@glyph</a>, the creator of Twisted, was working on a text-based multiplayer game called Twisted Reality</li>
-		<li>in java, with threads (which deadlocked, caused bugs and scaled poorly)</li>
-		<li>Alternative found in python <a href="http://docs.python.org/library/select.html">select</a> module</li>
-		<li class="slide">Worked much better and gradually evolved into the netwoking engine.</li>
-	</ul>
+  <ul>
+    <li>Starts at year 2000</li>
+    <li><a href="https://twitter.com/glyph">@glyph</a>, the creator of Twisted, was working on a text-based multiplayer game called Twisted Reality</li>
+    <li>in java, with threads (which deadlocked, caused bugs and scaled poorly)</li>
+    <li>Alternative found in python <a href="http://docs.python.org/library/select.html">select</a> module</li>
+    <li class="slide">Worked much better and gradually evolved into the netwoking engine.</li>
+  </ul>
 </section>
 
 
 <section class="slide">
-	<h2>What is Twisted?</h2>
+  <h2>What is Twisted?</h2>
 
-	<ul>
-		<li>Framework for asynchronous <strong>programming</strong></li>
-		<li class="slide">It's not just asynchronous layer in between socket and synchronous code</li>
-		<li class="slide">This asynchronny fundamentally affects how you write and think about the code
-			<ul>
-				<li class="slide">I/O performed via callbacks which makes the code nonlinear</li>
-				<li class="slide">troublesome use of libraries without async interface</li>
-			</ul>
-		</li>
-	</ul>
+  <ul>
+    <li>Framework for asynchronous <strong>programming</strong></li>
+    <li class="slide">It's not just asynchronous layer in between socket and synchronous code</li>
+    <li class="slide">This asynchronny fundamentally affects how you write and think about the code
+      <ul>
+        <li class="slide">I/O performed via callbacks which makes the code nonlinear</li>
+        <li class="slide">troublesome use of libraries without async interface</li>
+      </ul>
+    </li>
+  </ul>
 </section>
 
 <section class="slide">
-	<h2>Features</h2>
+  <h2>Features</h2>
 
-	<ul>
-		<li>Reactor Loop</li>
-		<li>Deferred</li>
-		<li>Transport &amp; protocol separation</li>
-		<li>Protocol implementations</li>
-		<li>Foreign Loop support</li>
-	</ul>
+  <ul>
+    <li>Reactor Loop</li>
+    <li>Deferred</li>
+    <li>Transport &amp; protocol separation</li>
+    <li>Protocol implementations</li>
+    <li>Foreign Loop support</li>
+  </ul>
 </section>
 
 <section class="slide">
-	<h2>Reactor Loop</h2>
+  <h2>Reactor Loop</h2>
 
-	<div><img style="width: 40%; height: 40%;" src="./assets/reactor-callback.png" alt="Reactor Loop diagram" /></div>
+  <div><img style="width: 40%; height: 40%;" src="./assets/reactor-callback.png" alt="Reactor Loop diagram" /></div>
 </section>
 
 <section class="slide">
-	<h2>Deferred</h2>
+  <h2>Deferred</h2>
 
-	<ul>
-		<li>An object returned instead of the result</li>
-		<li>Attached functions in callback/errback chains.</li>
-		<li>When the result actually arrives the callback chain gets executed</li>
-		<li>Hard to describe, easier to read the <a href="http://twistedmatrix.com/trac/browser/tags/releases/twisted-11.0.0/twisted/internet/defer.py#L467">source code</a></li>
-	</ul>
+  <ul>
+    <li>An object returned instead of the result</li>
+    <li>Attached functions in callback/errback chains.</li>
+    <li>When the result actually arrives the callback chain gets executed</li>
+    <li>Hard to describe, easier to read the <a href="http://twistedmatrix.com/trac/browser/tags/releases/twisted-11.0.0/twisted/internet/defer.py#L467">source code</a></li>
+  </ul>
 </section>
 
 <section class="slide">
-	<h2>Deferred callback chains</h2>
+  <h2>Deferred callback chains</h2>
 
-	<img src="./assets/deferred-process.png" style="width: 40%; height: 40%;" alt="deferred proccess" />
+  <img src="./assets/deferred-process.png" style="width: 40%; height: 40%;" alt="deferred proccess" />
 </section>
 
 <section class="slide">
-	<pre><code class="python lined"># Deferred example
+  <pre><code class="python lined"># Deferred example
 def errback(reason):
     print "Oh noes: {0}".format(reason)
     sys.exit(1)
@@ -119,50 +119,50 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
-	<h2>Transport &amp; protocol separation</h2>
+  <h2>Transport &amp; protocol separation</h2>
 
-	<ul>
-		<li>Layer abstraction/encapsulation similar to <a href="http://en.wikipedia.org/wiki/TCP/IP_model">TCP/IP model</a></li>
-		<li>example: json-rpc - http/netstrings</li>
-		<li class="slide">3 main parts<ul>
-			<li>Transports</li>
-			<li>Factories</li>
-			<li>Protocols</li>
-			</ul>
-	</ul>
+  <ul>
+    <li>Layer abstraction/encapsulation similar to <a href="http://en.wikipedia.org/wiki/TCP/IP_model">TCP/IP model</a></li>
+    <li>example: json-rpc - http/netstrings</li>
+    <li class="slide">3 main parts<ul>
+      <li>Transports</li>
+      <li>Factories</li>
+      <li>Protocols</li>
+      </ul>
+  </ul>
 </section>
 
 <section class="slide">
-	<h2>flow / object lifetime</h2>
+  <h2>flow / object lifetime</h2>
 
-	<ol>
-		<li class="slide">Transport (with a factory) listens on TCP socket</li>
-		<li class="slide">When client connects, factory creates the Protocol object</li>
-		<li class="slide">Transport delivers data into the Protocol</li>
-		<li class="slide">Protocol handles the data</li>
-		<li class="slide">When connection is terminated, protocol object is destroyed</li>
-	</ol>
+  <ol>
+    <li class="slide">Transport (with a factory) listens on TCP socket</li>
+    <li class="slide">When client connects, factory creates the Protocol object</li>
+    <li class="slide">Transport delivers data into the Protocol</li>
+    <li class="slide">Protocol handles the data</li>
+    <li class="slide">When connection is terminated, protocol object is destroyed</li>
+  </ol>
 </section>
 
 <section class="slide">
-	<h2>Protocol implementations</h2>
+  <h2>Protocol implementations</h2>
 
-	<ul>
-		<li>Big advantage is many existing implementations of standard protocols</li>
-		<li>like HTTP, IRC, XMPP, SMTP, etc</li>
-		<li>using them is just a matter of implementating the prepared interfaces:
-			<ol><li class="slide">deriving the protocol interface</li>
-				<li class="slide">implementing the event methods</li>
-				<li class="slide">attaching the protocol to transport</li>
-				<li class="slide">and starting the reactor</li>
-			</ol>
-		</li>
-	</ul>
+  <ul>
+    <li>Big advantage is many existing implementations of standard protocols</li>
+    <li>like HTTP, IRC, XMPP, SMTP, etc</li>
+    <li>using them is just a matter of implementating the prepared interfaces:
+      <ol><li class="slide">deriving the protocol interface</li>
+        <li class="slide">implementing the event methods</li>
+        <li class="slide">attaching the protocol to transport</li>
+        <li class="slide">and starting the reactor</li>
+      </ol>
+    </li>
+  </ul>
 </section>
 
 <section class="slide">
-	<h2>IRC protocol example</h2>
-	<pre><code class="python lined">class IRCClient(basic.LineReceiver):
+  <h2>IRC protocol example</h2>
+  <pre><code class="python lined">class IRCClient(basic.LineReceiver):
     def userJoined(self, user, channel):
         """Called when I see another user joining a channel.
         """
@@ -177,51 +177,51 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
-	<h2>Foreign Loop support</h2>
+  <h2>Foreign Loop support</h2>
 
-	<ul>
-		<li>Twisted can integrate with foreign event loops, such as those of GTK+, Qt and Cocoa (through PyObjC)</li>
-		<li>This allows using Twisted as the networking support layer in graphical user interface (GUI)</li>
-	</ul>
+  <ul>
+    <li>Twisted can integrate with foreign event loops, such as those of GTK+, Qt and Cocoa (through PyObjC)</li>
+    <li>This allows using Twisted as the networking support layer in graphical user interface (GUI)</li>
+  </ul>
 </section>
 
 <section class="slide">
-	<h2>Caveats</h2>
-	<ul>
-		<li>Database access
-			<ul>
-				<li class="slide">Kinda complicated due to non-blocking requirement</li>
-				<li class="slide">but there is <a href="http://evennia.com/">evennia MUD project</a> somehow using Django ORM</li>
-				<li class="slide">SQLalchemy can be used w/ deferToThread</li>
-				<li class="slide"><code>twisted.enterprise.adbapi</code> asynchronous DB-API v2.0 (raw SQL)</li>
-				<li class="slide"><a href="http://findingscience.com/twistar/">Twistar</a> Active Record for Twisted</li>
-			</ul>
-		</li>
-		<li class="slide">Twisted's unit test runner - Trial<ul>
-			<li class="slide">some errors manifest in later test cases</li>
-			<li class="slide">incorrect tests may hang forever</li>
-			</ul>
-		</li>
-		<li class="slide">Twisted as a platform<ul>
-			<li class="slide">Most of the libraries are synchronous -> shortage of libs that play well with twisted</li>
-			<li class="slide">Relatively small community and slow progress on new standards</li>
-			</ul>
-		</li>
-	</ul>
+  <h2>Caveats</h2>
+  <ul>
+    <li>Database access
+      <ul>
+        <li class="slide">Kinda complicated due to non-blocking requirement</li>
+        <li class="slide">but there is <a href="http://evennia.com/">evennia MUD project</a> somehow using Django ORM</li>
+        <li class="slide">SQLalchemy can be used w/ deferToThread</li>
+        <li class="slide"><code>twisted.enterprise.adbapi</code> asynchronous DB-API v2.0 (raw SQL)</li>
+        <li class="slide"><a href="http://findingscience.com/twistar/">Twistar</a> Active Record for Twisted</li>
+      </ul>
+    </li>
+    <li class="slide">Twisted's unit test runner - Trial<ul>
+      <li class="slide">some errors manifest in later test cases</li>
+      <li class="slide">incorrect tests may hang forever</li>
+      </ul>
+    </li>
+    <li class="slide">Twisted as a platform<ul>
+      <li class="slide">Most of the libraries are synchronous -> shortage of libs that play well with twisted</li>
+      <li class="slide">Relatively small community and slow progress on new standards</li>
+      </ul>
+    </li>
+  </ul>
 </section>
 
 <section class="slide">
-	<h2>Footnotes</h2>
+  <h2>Footnotes</h2>
 
-	<ul>
-		<li>Twisted at AOSABook <a href="http://www.aosabook.org/en/twisted.html">aosabook.org/en/twisted.html</a></li>
-		<li>Exhaustive Twisted tutorial at krondo.com <a href="http://krondo.com/?page_id=1327">http://krondo.com/?page_id=1327</a></li>
-	</ul>
+  <ul>
+    <li>Twisted at AOSABook <a href="http://www.aosabook.org/en/twisted.html">aosabook.org/en/twisted.html</a></li>
+    <li>Exhaustive Twisted tutorial at krondo.com <a href="http://krondo.com/?page_id=1327">http://krondo.com/?page_id=1327</a></li>
+  </ul>
 
-	<ul class="TODO">
-		<li>Slides hosted at <a href="http://yaccz.github.com/slides-twisted-intro/">yaccz.github.com/slides-twisted-intro/</a></li>
-		<li><a href="https://twitter.com/yaccz">@yaccz</a></li>
-	</ul>
+  <ul class="TODO">
+    <li>Slides hosted at <a href="http://yaccz.github.com/slides-twisted-intro/">yaccz.github.com/slides-twisted-intro/</a></li>
+    <li><a href="https://twitter.com/yaccz">@yaccz</a></li>
+  </ul>
 </section>
 
 <!-- End slides. -->
@@ -235,17 +235,17 @@ reactor.run()</code></pre>
 
 <!-- deck.status snippet -->
 <p class="deck-status">
-	<span class="deck-status-current"></span>
-	/
-	<span class="deck-status-total"></span>
+  <span class="deck-status-current"></span>
+  /
+  <span class="deck-status-total"></span>
 </p>
 
 <!-- deck.goto snippet -->
 <form action="." method="get" class="goto-form">
-	<label for="goto-slide">Go to slide:</label>
-	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
-	<datalist id="goto-datalist"></datalist>
-	<input type="submit" value="Go">
+  <label for="goto-slide">Go to slide:</label>
+  <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+  <datalist id="goto-datalist"></datalist>
+  <input type="submit" value="Go">
 </form>
 
 <!-- deck.hash snippet -->
@@ -270,34 +270,34 @@ reactor.run()</code></pre>
 <script src="./jq-linedtextarea/jquery-linedtextarea.js"></script>
 <link rel="stylesheet" href="./jq-linedtextarea/jquery-linedtextarea.cs">
 <style type="text/css">
-	.lines { position: absolute; display: block; width: 30px; z-index: 9000; left: -1.5em; }
-	/* This makes the lines generated by linedtextarea visible */
+  .lines { position: absolute; display: block; width: 30px; z-index: 9000; left: -1.5em; }
+  /* This makes the lines generated by linedtextarea visible */
 </style>
 <!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
-	$(function() {
-		$.deck('.slide');
+  $(function() {
+    $.deck('.slide');
 
-		$(".lined").linedtextarea(
-			{selectedLine: 1}
-		);
+    $(".lined").linedtextarea(
+      {selectedLine: 1}
+    );
 
-		// {{{ mouse controll for the slides
-		document.oncontextmenu = function() {return false;};
-		$(document).mousedown(function(e){
-			arg='next';
-			if( e.button == 2 )
-				arg='prev';
-			$.deck(arg);
-		});
-		// }}}
-	});
+    // {{{ mouse controll for the slides
+    document.oncontextmenu = function() {return false;};
+    $(document).mousedown(function(e){
+      arg='next';
+      if( e.button == 2 )
+        arg='prev';
+      $.deck(arg);
+    });
+    // }}}
+  });
 
-	//hljs.initHighlightingOnLoad();
-	$("code").each(function(i,v) { hljs.highlightBlock(v); });
-	/* .lined class must be on code in order to be visible in all cases (if it is on pre tag it will be out of monitor when the pre is fully strectched on the screen)
-	 * then highlight.js must be called explicitly for specific blocks we need to highlight, so just "code" tags, instead of "pre code"
-	 */
+  //hljs.initHighlightingOnLoad();
+  $("code").each(function(i,v) { hljs.highlightBlock(v); });
+  /* .lined class must be on code in order to be visible in all cases (if it is on pre tag it will be out of monitor when the pre is fully strectched on the screen)
+   * then highlight.js must be called explicitly for specific blocks we need to highlight, so just "code" tags, instead of "pre code"
+   */
 </script>
 </body>
 </html>
