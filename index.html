@@ -106,14 +106,12 @@
 
 <section class="slide">
 	<pre><code class="python lined"># Deferred example
-def callback(result):
-	for i in result: print i
-
 def errback(reason):
-	print reason
+    print "Oh noes: {0}".format(reason)
+    sys.exit(1)
 
-d = getDeferredFromSomewhere()
-d.addCallback(callback)
+d = twisted.web.client.Agent().request('GET', url, Headers())
+d.addCallback(lambda response: r.deliverBody(MyProtocol()))
 d.addErrback(errback)
 d.addBoth(lambda _: reactor.stop())
 
