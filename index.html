@@ -216,7 +216,7 @@ reactor.run()
   </code></pre>
 
 
-  <pre><code class="python lined">def test_irc():
+  <pre><code class="python lined">def test_irc_hello():
     p = YourIRCProtocol()
     p.makeConnection(StringIO())
     p.lineReceived(":bob!~bob@example.net PRIVMSG #foo :ohai")
