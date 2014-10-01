@@ -124,7 +124,7 @@ def errback(reason):
     sys.exit(1)
 
 d = twisted.web.client.Agent().request('GET', url, Headers())
-d.addCallback(lambda response: r.deliverBody(MyProtocol()))
+d.addCallback(lambda response: r.deliverBody(YourProtocol()))
 d.addErrback(errback)
 d.addBoth(lambda _: reactor.stop())
 
