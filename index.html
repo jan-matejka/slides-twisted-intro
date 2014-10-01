@@ -212,16 +212,13 @@ reactor.run()
     pass
 
   def makeConnection(self, transport):
-    self.transport = transport
-  </code></pre>
-
+    self.transport = transport</code></pre>
 
   <pre><code class="python lined">def test_irc_hello():
     p = YourIRCBot()
     p.makeConnection(StringIO())
     p.lineReceived(":bob JOIN #foo")
-    ok_(p.transport.getvalue(), "PRIVMSG #foo Hello bob")
-  </code></pre>
+    ok_(p.transport.getvalue(), "PRIVMSG #foo Hello bob")</code></pre>
 </section>
 
 <section class="slide">
