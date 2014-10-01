@@ -99,6 +99,27 @@
 </section>
 
 <section class="slide">
+  <h2>Reactor Loop - not as hard as it looks</h2>
+
+  <pre><code class="python lined">class NaiveReactor(object):
+    def run(self):
+        while self._run:
+          for t in self.transports:
+            t.read()
+            sleep(0.001)
+
+class Transport:
+  def read(self):
+    try:
+      xs = read(self.fd, 512):
+    except IOError:
+        if e.errno != 11:
+            self.protocol.connectionLost()
+    else:
+      self.protocol.dataReceived(xs)
+</section>
+
+<section class="slide">
   <h2>Deferred</h2>
 
   <ul>
