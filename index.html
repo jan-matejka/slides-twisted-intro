@@ -235,41 +235,39 @@ reactor.run()
 
 <section class="slide">
   <h2>Caveats</h2>
+
+  <h3>Database access</h3>
   <ul>
-    <li>Database access
-      <ul>
-        <li>Less advanced as most libraries don't provide async API</li>
-        <li>SQLAlchemy <ul>
-          <li>deferToThread</li>
-          <li>recently (Oct 2013) appeared <a href="https://github.com/alex/alchimia">Alchimia</a> - adds async API to sqlalchemy, but limited</li>
-        </ul><li>
-        <li><a href="http://evennia.com/">evennia MUD project</a> somehow using Django ORM</li>
-        <li><code>twisted.enterprise.adbapi</code> asynchronous DB-API v2.0 (raw SQL)</li>
-        <li><a href="http://findingscience.com/twistar/">Twistar</a> Active Record for Twisted</li>
-      </ul>
-    </li>
+      <li>Less advanced as most libraries don't provide async API</li>
+      <li>SQLAlchemy <ul>
+        <li>deferToThread</li>
+        <li>recently (Oct 2013) appeared <a href="https://github.com/alex/alchimia">Alchimia</a> - adds async API to sqlalchemy, but limited</li>
+      </ul><li>
+      <li><a href="http://evennia.com/">evennia MUD project</a> somehow using Django ORM</li>
+      <li><code>twisted.enterprise.adbapi</code> asynchronous DB-API v2.0 (raw SQL)</li>
+      <li><a href="http://findingscience.com/twistar/">Twistar</a> Active Record for Twisted</li>
+  </li>
   </ul>
 </section>
 
 <section class="slide">
   <h2>Caveats</h2>
-  <ul>
-    <li>Twisted's unit test runner - Trial<ul>
-      <li>some errors manifest in later test cases</li>
-      <li>incorrect tests may hang forever</li>
-      </ul>
-    </li>
-  </ul>
+
+  <h3>Unit Testing - Trial</h3>
+
+  <div>If you touch <code>reactor</code> in your test cases, errors can
+  manifest in later testcases or hang forever</div>
 </section>
 
 <section class="slide">
   <h2>Caveats</h2>
+
+  <h3>Twisted as a platform</h3>
+
   <ul>
-    <li>Twisted as a platform<ul>
-      <li>Most of the libraries are synchronous -> shortage of libs that play well with twisted</li>
+      <li>Most libraries provide only sync API</li>
+      <li>Therefore libraries you are used to, may not be usable (or need workarounds)</li>
       <li>Relatively small community and slow progress on new standards</li>
-      </ul>
-    </li>
   </ul>
 </section>
 
