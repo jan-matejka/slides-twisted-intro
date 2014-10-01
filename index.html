@@ -217,10 +217,10 @@ reactor.run()
 
 
   <pre><code class="python lined">def test_irc_hello():
-    p = YourIRCProtocol()
+    p = YourIRCBot()
     p.makeConnection(StringIO())
-    p.lineReceived(":bob!~bob@example.net PRIVMSG #foo :ohai")
-    ok_(p.transport.getvalue(), "PRIVMSG #foo Hi bob!")
+    p.lineReceived(":bob JOIN #foo")
+    ok_(p.transport.getvalue(), "PRIVMSG #foo Hello bob")
   </code></pre>
 </section>
 
