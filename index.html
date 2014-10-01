@@ -190,6 +190,21 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
+  <h2>IRC protocol example</h2>
+
+  <pre><code class="python lined">class YourIRCBot(IRCClient):
+    def userJoined(self, user, channel):
+      self.transport.write("Hello " + user)
+
+  class BotFactory(twisted.internet.protocol.ReconnectingClientFactory):
+    protol = YourIRCBot
+
+  reactor.connectTCP("irc.freenode.net", 6667, BotFactory())
+  reactor.run()
+  </code></pre>
+</section>
+
+<section class="slide">
   <h2>Foreign Loop support</h2>
 
   <ul>
