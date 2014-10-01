@@ -205,6 +205,26 @@ reactor.run()
 </section>
 
 <section class="slide">
+  <h2>Testability</h2>
+
+  <pre><code class="python lined">class Protocol:
+  def dataReceived(self, data):
+    pass
+
+  def makeConnection(self, transport):
+    self.transport = transport
+  </code></pre>
+
+
+  <pre><code class="python lined">def test_irc():
+    p = YourIRCProtocol()
+    p.makeConnection(StringIO())
+    p.lineReceived(":bob!~bob@example.net PRIVMSG #foo :ohai")
+    ok_(p.transport.getvalue(), "PRIVMSG #foo Hi bob!")
+  </code></pre>
+</section>
+
+<section class="slide">
   <h2>Foreign Loop support</h2>
 
   <ul>
