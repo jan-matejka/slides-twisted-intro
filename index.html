@@ -37,12 +37,14 @@
 
 <section class="slide">
   <h2>Twisted</h2>
+  <!-- Talk topic -->
 
   <div>Event-driven networking engine in Python licensed under <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</div>
 </section>
 
 <section class="slide">
   <h2>Why should you care?</h2>
+  <!-- = elevator pitch -->
 
   <ul>
     <li>Super easy to implement apps on top of existing protocols</li>
@@ -53,106 +55,71 @@
 </section>
 
 <section class="slide">
+  <!-- looks like a buzz kill but expands on the pitch
+       - "without thread-like API"
+       presentation needs to focus on that -->
   <h2>History</h2>
 
   <ul>
     <li>Starts at year 2000</li>
     <li><a href="https://twitter.com/glyph">@glyph</a>, the author, working on text-based multiplayer game - Twisted Reality</li>
     <li>originaly in java. Threads deadlocking, many bugs, poor scaling</li>
-    <li>Alternative found in python <a href="http://docs.python.org/library/select.html">select</a> module</li>
+    <li>Alternative found in python's <a href="http://docs.python.org/library/select.html">select</a> module</li>
     <li>Worked much better and gradually evolved into the netwoking engine.</li>
   </ul>
 </section>
 
 <section class="slide">
-  <h2>Features</h2>
+  <h2>Protocol implementations</h2>
+  <!-- expands the pitch
+       describe why it is super easy on a high level -->
 
   <ul>
-    <li>Reactor Loop</li>
+    <li>Big advantage is many existing protocols implementations</li>
+    <li>like HTTP, IRC, XMPP, SMTP, etc</li>
+    <li>using them is just a matter of implementating the prepared interfaces:
+      <ol><li>derive protocol class</li>
+        <li>implement event methods</li>
+      </ol>
+    </li>
+  </ul>
+</section>
+
+<section class="slide">
+  <!-- expands the pitch with GUI use case
+    -->
+  <h2>Foreign Loop support</h2>
+
+  <ul>
+    <li>Integrates with foreign event loops, such as GTK+, Qt, Cocoa</li>
+    <li>Allows using Twisted as the networking support layer in GUIs</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <!-- pitch over. Let's go over twisted's main parts and what they are
+       for -->
+  <h2>Main parts</h2>
+
+  <ul>
+    <li>Reactor (Event) Loop</li>
+    <!-- ^ Implements the Event Loop / handles the actual IO -->
+    <li>Protocols</li>
+    <!-- ^ implement the network protocols: event methods on servers -->
     <li>Deferred</li>
-    <li>Transport &amp; protocol separation</li>
-    <li>Protocol implementations</li>
-    <li>Foreign Loop support</li>
+    <!-- ^ implements the async API. used in clients -->
+    <li>Transports</li>
+    <li>Factories</li>
+    <!-- ^ plumbing between reactor and protocols -->
   </ul>
 </section>
 
 <section class="slide">
-  <h2>Reactor Loop</h2>
-
-  <div><img style="width: 40%; height: 40%;" src="./assets/reactor-callback.png" alt="Reactor Loop diagram" /></div>
-</section>
-
-<section class="slide">
-  <h2>Reactor Loop - not as hard as it looks</h2>
-
-  <pre><code class="python lined">class NaiveReactor(object):
-    def run(self):
-        while self._run:
-          for t in self.transports:
-            t.read()
-            sleep(0.001)
-
-class Transport:
-  def read(self):
-    try:
-      xs = read(self.fd, 512):
-    except IOError:
-        if e.errno != 11:
-            self.protocol.connectionLost()
-    else:
-      self.protocol.dataReceived(xs)
-</section>
-
-<section class="slide">
-  <h2>Deferred</h2>
-
-  <ul>
-    <li>An object returned instead of the result</li>
-    <li>Attached functions in callback/errback chains.</li>
-    <li>When the result actually arrives the callback chain gets executed</li>
-    <li>Hard to describe, easier to read the <a href="http://twistedmatrix.com/trac/browser/tags/releases/twisted-11.0.0/twisted/internet/defer.py#L467">source code</a></li>
-  </ul>
-</section>
-
-<section class="slide">
-  <h2>Deferred callback chains</h2>
-
-  <img src="./assets/deferred-process.png" style="width: 40%; height: 40%;" alt="deferred proccess" />
-</section>
-
-<section class="slide">
-  <pre><code class="python lined"># Deferred example
-def errback(reason):
-    print "Oh noes: {0}".format(reason)
-    sys.exit(1)
-
-d = twisted.web.client.Agent().request('GET', url, Headers())
-d.addCallback(lambda response: r.deliverBody(YourProtocol()))
-d.addErrback(errback)
-d.addBoth(lambda _: reactor.stop())
-
-reactor.run()</code></pre>
-</section>
-
-<section class="slide">
-  <h2>Transport &amp; protocol separation</h2>
-
-  <ul>
-    <li>Layer abstraction/encapsulation similar to <a href="http://en.wikipedia.org/wiki/TCP/IP_model">TCP/IP model</a></li>
-    <li>example: json-rpc - http/netstrings</li>
-    <li>3 main parts<ul>
-      <li>Transports</li>
-      <li>Factories</li>
-      <li>Protocols</li>
-      </ul>
-  </ul>
-</section>
-
-<section class="slide">
-  <h2>flow / object lifetime</h2>
+  <!-- explain the main parts interactions for an "Event Receiver" case -->
+  <h2>flow / object lifetime - TCP Server</h2>
 
   <ol>
-    <li>Transport (with a factory) listens on TCP socket</li>
+    <li>Transport (with a Factory) listens on TCP socket</li>
     <li>When client connects, factory creates the Protocol object</li>
     <li>Transport delivers data into the Protocol</li>
     <li>Protocol handles the data</li>
@@ -161,22 +128,48 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
-  <h2>Protocol implementations</h2>
+  <!-- explains the relation between transport and protocol -->
+  <h2>Transport &amp; protocol separation</h2>
 
   <ul>
-    <li>Big advantage is many existing implementations of standard protocols</li>
-    <li>like HTTP, IRC, XMPP, SMTP, etc</li>
-    <li>using them is just a matter of implementating the prepared interfaces:
-      <ol><li>deriving the protocol interface</li>
-        <li>implementing the event methods</li>
-        <li>attaching the protocol to transport</li>
-        <li>and starting the reactor</li>
-      </ol>
-    </li>
+    <li>Layer abstraction/encapsulation similar to <a href="http://en.wikipedia.org/wiki/TCP/IP_model">TCP/IP model</a></li>
+    <li>example: netstrings protocol over TCP transport</li>
+    <li>json-rpc protocol over netstrings</li>
+    <li>or json-rpc over http transport</li>
   </ul>
 </section>
 
 <section class="slide">
+  <!-- diagram overview of reactor -->
+  <h2>Reactor Loop</h2>
+
+  <div><img style="width: 40%; height: 40%;" src="./assets/reactor-callback.png" alt="Reactor Loop diagram" /></div>
+</section>
+
+<section class="slide">
+  <!-- more tangible explanation of what reactor does -->
+  <h2>Reactor Loop</h2>
+
+  <pre><code class="python lined">class NaiveReactor:
+    def run(self):
+        while self._run:
+          for t in self.transports:
+            t.read()
+            sleep(0.001)
+
+class NaiveTransport:
+  def read(self):
+    try:
+      xs = read(self.fd, 512):
+    except IOError:
+        if e.errno != 11:
+            self.protocol.connectionLost()
+    else:
+      self.protocol.dataReceived(xs)</code></pre>
+</section>
+
+<section class="slide">
+  <!-- now show the end-user API -->
   <h2>IRC protocol example</h2>
   <pre><code class="python lined">class IRCClient(basic.LineReceiver):
     def userJoined(self, user, channel):
@@ -193,6 +186,7 @@ reactor.run()</code></pre>
 </section>
 
 <section class="slide">
+  <!-- and how to actually use it -->
   <h2>IRC protocol example</h2>
 
   <pre><code class="python lined">class YourIRCBot(IRCClient):
@@ -208,6 +202,7 @@ reactor.run()
 </section>
 
 <section class="slide">
+  <!-- and test it -->
   <h2>Testability</h2>
 
   <pre><code class="python lined">class Protocol:
@@ -225,12 +220,30 @@ reactor.run()
 </section>
 
 <section class="slide">
-  <h2>Foreign Loop support</h2>
+  <!-- That covered how to implement code that receives events.
+       Now lets cover on how to generate them -->
+  <h2>Generating events - Deferred</h2>
 
-  <ul>
-    <li>Twisted can integrate with foreign event loops, such as those of GTK+, Qt and Cocoa (through PyObjC)</li>
-    <li>This allows using Twisted as the networking support layer in graphical user interface (GUI)</li>
-  </ul>
+  <pre><code class="python lined">def errback(reason):
+    print "Oh noes: {0}".format(reason)
+    sys.exit(1)
+
+d = twisted.web.client.Agent().request('GET', url, Headers())
+# Deferred returned instad of result
+d.addCallback(lambda response: r.deliverBody(YourProtocol()))
+# callback to execute once result arrives
+d.addErrback(errback)
+# or errback in case of failure
+d.addBoth(lambda _: reactor.stop())
+# and another callback regardless of success / fail
+
+reactor.run()</code></pre>
+</section>
+
+<section class="slide">
+  <h2>Deferred callback chains</h2>
+
+  <img src="./assets/deferred-process.png" style="width: 40%; height: 40%;" alt="deferred proccess" />
 </section>
 
 <section class="slide">
@@ -252,6 +265,7 @@ reactor.run()
 </section>
 
 <section class="slide">
+  <!-- wrap up: what's not so great -->
   <h2>Caveats</h2>
 
   <h3>Unit Testing - Trial</h3>
@@ -271,7 +285,6 @@ reactor.run()
       <li>Relatively small community and slow progress on new standards</li>
   </ul>
 </section>
-
 
 <section class="slide">
   <h2>Footnotes</h2>
